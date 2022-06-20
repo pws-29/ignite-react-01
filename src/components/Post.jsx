@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Avatar } from './Avatar';
 import { Comment } from './Comment';
+
 import styles from './Post.module.css';
 
 export function Post() {
@@ -9,7 +11,7 @@ export function Post() {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <img className={styles.avatar} src="https://github.com/wspietro.png " alt="avatar" />
+          <Avatar src="https://github.com/pws-29.png" />
           <div className={styles.authorInfo}>
             <strong>Pietro Weg Sera</strong>
             <span>Web Developer</span>
