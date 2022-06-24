@@ -7,14 +7,26 @@ import styles from './Post.module.css';
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 
+
 export function Post({ author, content, publishedAt }) {
   const [textareaValue, setTextareaValue] = useState('');
+  const [comments, setComments] = useState(['Post muito bacana, hein?!']);
 
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", { locale: ptBR });
   const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
     locale: ptBR,
     addSuffix: true,
   });
+
+  function handleCreateComment(e) {
+    e.preventDefault();
+
+    setComments(prevState => [...prevState, textareaValue], () => {
+      console.log(comments)
+    });
+
+    setTextareaValue('');
+  }
 
   return (
     <article className={styles.post}>
@@ -41,7 +53,7 @@ export function Post({ author, content, publishedAt }) {
         })}
       </div>
 
-      <form className={styles.commentForm}>
+      <form onSubmit={handleCreateComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
 
         <textarea
@@ -55,9 +67,9 @@ export function Post({ author, content, publishedAt }) {
       </form>
 
       <div className={styles.commentList}>
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.map(comment => {
+          return <Comment content={comment} />
+        })}
       </div>
     </article>
   );
