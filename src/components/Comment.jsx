@@ -12,10 +12,6 @@ export function Comment({ content, onDeleteComment }) {
     onDeleteComment(content);
   }
 
-  // function handleLikeComment() {
-  //   setIsLiked(prevState => !prevState);
-  // }
-
   return (
     <div className={styles.comment}>
       <Avatar hasBorder={false} src="https://github.com/pws-29.png" />
