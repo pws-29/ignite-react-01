@@ -1,12 +1,20 @@
+import { useState } from 'react';
+
 import { ThumbsUp, Trash } from 'phosphor-react';
 import styles from './Comment.module.css'
 
 import { Avatar } from './Avatar';
 
 export function Comment({ content, onDeleteComment }) {
+  const [isLiked, setIsLiked] = useState(false);
+
   function handleDeleteComment() {
     onDeleteComment(content);
   }
+
+  // function handleLikeComment() {
+  //   setIsLiked(prevState => !prevState);
+  // }
 
   return (
     <div className={styles.comment}>
@@ -18,6 +26,7 @@ export function Comment({ content, onDeleteComment }) {
             <div className={styles.authorAndTime}>
               <strong>Pietro Weg Sera</strong>
               <time title="11 de Maio às 8h13" dateTime="2022-05-11 08:13:08">Cerca de 1h atrás</time>
+              {/* TODO: alterar horário do comentário */}
             </div>
 
             <button onClick={handleDeleteComment} title='Deletar comentário'>
@@ -29,9 +38,9 @@ export function Comment({ content, onDeleteComment }) {
         </div>
 
         <footer>
-          <button>
+          <button onClick={() => setIsLiked(prevState => !prevState)}>
             <ThumbsUp />
-            Aplaudir <span>20</span>
+            Aplaudir <span>{isLiked ? 1 : 0}</span>
           </button>
         </footer>
       </div>
