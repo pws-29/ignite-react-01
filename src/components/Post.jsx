@@ -22,8 +22,11 @@ export function Post({ author, content, publishedAt }) {
     e.preventDefault();
 
     setComments(prevState => [...prevState, textareaValue]);
-
     setTextareaValue('');
+  }
+
+  function deleteComment(comment) {
+    setComments(prevState => prevState.filter(c => c !== comment));
   }
 
   return (
@@ -66,7 +69,13 @@ export function Post({ author, content, publishedAt }) {
 
       <div className={styles.commentList}>
         {comments.map(comment => {
-          return <Comment key={comment} content={comment} />
+          return (
+            <Comment
+              onDeleteComment={deleteComment}
+              key={comment}
+              content={comment}
+            />
+          )
         })}
       </div>
     </article>
